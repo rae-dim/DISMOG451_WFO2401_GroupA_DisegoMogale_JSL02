@@ -44,3 +44,36 @@ function addNewGoal() {
         goalList.removeChild(newGoal);
     });
 };
+
+// Add event listener to the goal submit button
+document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
+
+///
+let waterIntake = 0;
+const updateWaterIntake = (change) => {
+    waterIntake += change;
+    document.querySelector('#waterIntakeDisplay').textContent = `${waterIntake} glasses 💦`;
+};
+
+document.querySelector('#increaseWater').addEventListener('click', () => updateWaterIntake(1));
+document.querySelector('#decreaseWater').addEventListener('click', () => updateWaterIntake(-1));
+
+const updateProgressCharts = () => {
+    document.querySelector('#workoutProgress').textContent = "Updated workout progress...";
+    document.querySelector('#calorieIntakeProgress').textContent = "Updated calorie intake progress...";
+};
+
+updateProgressCharts();
+
+const toggleTheme = () => {
+    document.body.classList.toggle('dark-theme');
+};
+
+document.querySelector('#themeToggle').addEventListener('click', toggleTheme);
+
+const submitMealPlan = (event) => {
+    event.preventDefault(); 
+    alert('Meal plan submitted successfully! 🍴');
+};
+
+document.querySelector('#mealPlanForm').addEventListener('submit', submitMealPlan);

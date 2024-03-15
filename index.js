@@ -1,4 +1,4 @@
-
+//! Welcome SEction
 function welcome() {
     const welcomeMessage = document.getElementById('welcomeMessage')
     const today = new Date();
@@ -6,6 +6,9 @@ function welcome() {
 };
 welcome();
 
+
+let isDuplicate = false; //will be used for validating checkDuplicates functions
+//! Workout Section
 function displayWorkoutRoutine() {
     const workoutInput = document.querySelector('#workoutInput').value;
     if (workoutInput === '') {  //stops user from adding empty input value
@@ -18,24 +21,31 @@ function displayWorkoutRoutine() {
 
     newWorkout.innerHTML = workoutInput;
     workoutList.appendChild(newWorkout);
+    newWorkout.addEventListener('click', () => {
+        workoutList.removeChild(newWorkout);
+    });
 };
+
 function checkDuplicates1(workoutInput) {
     const workoutList = document.querySelector('#workoutList');
 
-    for (let i = 0; i < workoutList.children.length; i++) {
-        if (workoutList.children[i].textContent.trim() === workoutInput) {
+    for (let i = 0; i < workoutList.children.length; i++) {  //for loop used to iterate through each list item
+        if (workoutList.children[i].textContent === workoutInput) {
             isDuplicate = true;
-            throw {toString: function() { return "You have already submitted this workout, pick a different one"; } }
+            alert("You have already submitted this workout, pick a different one");
         }
     }
 }
 
 document.querySelector('#submitWorkout').addEventListener('click', displayWorkoutRoutine);
 
-let isDuplicate = false; // move this declaration outside the function
-
+//! Goals section
 function addNewGoal() {
     const goalInput = document.querySelector('#goalInput').value;
+    if (goalInput === '') {
+        return;
+    }
+
     const goalList = document.querySelector('#goalList');
 
     checkDuplicates2(goalInput);
@@ -43,29 +53,24 @@ function addNewGoal() {
     const newGoal = document.createElement('li');
     newGoal.textContent = goalInput;
     goalList.appendChild(newGoal);
-    
+
     newGoal.addEventListener('click', () => {
         goalList.removeChild(newGoal);
     });
 }
 
 function checkDuplicates2(goalInput) {
-    if (goalInput === '') {
-        // Skip empty values
-        return;
-    }
-
     const goalList = document.querySelector('#goalList');
 
-    for (let i = 0; i < goalList.children.length; i++) {
-        if (goalList.children[i].textContent.trim() === goalInput) {
+    for (let i = 0; i < goalList.children.length; i++) {  
+        if (goalList.children[i].textContent === goalInput) {
             isDuplicate = true;
-            throw new Error("You have already set this goal");
+            alert("You have already set this goal, add a different one");
         }
     }
 }
 
-// Add event listener to the goal submit button
+
 document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
 
 ///

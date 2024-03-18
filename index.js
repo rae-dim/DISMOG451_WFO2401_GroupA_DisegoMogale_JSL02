@@ -6,6 +6,9 @@ function welcome() {
 };
 welcome();
 
+/* function cleasInput() {
+    get
+} */
 
 let isDuplicate = false; //will be used for validating checkDuplicates functions
 //! Workout Section
@@ -38,6 +41,10 @@ function checkDuplicates1(workoutInput) {
 }
 
 document.querySelector('#submitWorkout').addEventListener('click', displayWorkoutRoutine);
+
+function clearInput1() {
+    document.getElementById('workoutInput').reset();
+}
 
 //! Goals section
 function addNewGoal() {
@@ -72,6 +79,10 @@ function checkDuplicates2(goalInput) {
 
 
 document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
+
+function clearInput2() {
+    document.getElementById('goalInput').reset(); //! was supposed to clear input field
+}
 
 ///
 let waterIntake = 0;

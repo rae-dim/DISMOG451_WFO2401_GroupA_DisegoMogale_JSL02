@@ -11,7 +11,7 @@ welcome();
 let isDuplicate = false; //will be used for validating checkDuplicates functions
 //! Workout Section
 function displayWorkoutRoutine() {
-    const workoutInput = document.querySelector('#workoutInput').value;
+    const workoutInput = document.querySelector('#workoutInput').value.toLowerCase();
     if (workoutInput === '') {  //stops user from adding empty input value
         return;
     }
@@ -22,7 +22,7 @@ function displayWorkoutRoutine() {
     const workoutList = document.querySelector('#workoutList');
     const newWorkout = document.createElement('li');
 
-    newWorkout.textContent = workoutInput;
+    newWorkout.innerHTML = workoutInput;
     workoutList.appendChild(newWorkout);
     newWorkout.addEventListener('click', () => {
         workoutList.removeChild(newWorkout);
@@ -48,7 +48,7 @@ document.querySelector('#submitWorkout').addEventListener('click', displayWorkou
 
 //! Goals section
 function addNewGoal() {
-    const goalInput = document.querySelector('#goalInput').value;
+    const goalInput = document.querySelector('#goalInput').value.toLowerCase();
     if (goalInput === '') {
         return;
     }

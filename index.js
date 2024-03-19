@@ -6,9 +6,7 @@ function welcome() {
 };
 welcome();
 
-/* function cleasInput() {
-    get
-} */
+
 
 let isDuplicate = false; //will be used for validating checkDuplicates functions
 //! Workout Section
@@ -17,12 +15,14 @@ function displayWorkoutRoutine() {
     if (workoutInput === '') {  //stops user from adding empty input value
         return;
     }
+    if (checkDuplicates1(workoutInput)) {
+        alert("You have already submitted this workout, pick a different one");
+        return; // Stops execution if it's a duplicate
+    }
     const workoutList = document.querySelector('#workoutList');
     const newWorkout = document.createElement('li');
 
-    checkDuplicates1(workoutInput)
-
-    newWorkout.innerHTML = workoutInput;
+    newWorkout.textContent = workoutInput;
     workoutList.appendChild(newWorkout);
     newWorkout.addEventListener('click', () => {
         workoutList.removeChild(newWorkout);
@@ -34,17 +34,17 @@ function checkDuplicates1(workoutInput) {
 
     for (let i = 0; i < workoutList.children.length; i++) {  //for loop used to iterate through each list item
         if (workoutList.children[i].textContent === workoutInput) {
-            isDuplicate = true;
-            alert("You have already submitted this workout, pick a different one");
+             return true; //Will return true if a duplicate is found
         }
     }
+    return false; //Will return false if no duplicate is found
 }
 
 document.querySelector('#submitWorkout').addEventListener('click', displayWorkoutRoutine);
 
-function clearInput1() {
-    document.getElementById('workoutInput').reset();
-}
+/*function clearInput1() {
+    document.getElementById('workoutInput').value = " "; //TODO Was supposed to clear the input field
+}*/
 
 //! Goals section
 function addNewGoal() {
@@ -52,11 +52,12 @@ function addNewGoal() {
     if (goalInput === '') {
         return;
     }
+    if (checkDuplicates2(goalInput)) {
+        alert("You have already submitted this goal, pick a different one");
+        return; // Stops execution if it's a duplicate
+    }
 
     const goalList = document.querySelector('#goalList');
-
-    checkDuplicates2(goalInput);
-
     const newGoal = document.createElement('li');
     newGoal.textContent = goalInput;
     goalList.appendChild(newGoal);
@@ -71,20 +72,20 @@ function checkDuplicates2(goalInput) {
 
     for (let i = 0; i < goalList.children.length; i++) {  
         if (goalList.children[i].textContent === goalInput) {
-            isDuplicate = true;
-            alert("You have already set this goal, add a different one");
+            return true;
         }
     }
+    return false;
 }
 
 
 document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
 
-function clearInput2() {
-    document.getElementById('goalInput').reset(); //! was supposed to clear input field
-}
+/*function clearInput2() {
+    document.getElementById('goalInput').value = " "; //TODO was supposed to clear input field
+}*/
 
-///
+//! Everything Else
 let waterIntake = 0;
 const updateWaterIntake = (change) => {
     waterIntake += change;
